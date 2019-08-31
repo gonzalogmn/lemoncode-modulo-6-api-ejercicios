@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
         cleanTable('cars-table');
         getAllCars().then((result) => {
-            addCarRows(result.data, 'cars-table');
+            addCarRows(result, 'cars-table');
         });
     });
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
         const carId = retrieveCarId();
         getCarById(carId)
-            .then((r) => populateEditCarForm(r.data));
+            .then((r) => populateEditCarForm(r));
     });
 
     const buttonAddCar = document.getElementById('add');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return getAllCars();
             })
             .then((result) => {
-                addCarRows(result.data, 'cars-table');
+                addCarRows(result, 'cars-table');
             });
     });
 });

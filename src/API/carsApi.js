@@ -5,13 +5,34 @@ axios.defaults.baseURL = baseUrl;
 
 
 export const getAllCars = () => {
-    return axios.get('/api/cars');
+    return new Promise((resolve, _) => {
+        axios.get('/api/cars')
+        .then((result) => {
+            resolve(result.data);
+        }).catch((err) => {
+            console.error(err);
+        });
+    });
 }
 
 export const getCarById = (id) => {
-    return axios.get(`/api/cars/${id}`);
+    return new Promise((resolve, _) => {
+        axios.get(`/api/cars/${id}`)
+        .then((result) => {
+            resolve(result.data);
+        }).catch((err) => {
+            console.error(err);
+        });
+    });
 }
 
 export const addCar = (car) => {
-    return axios.post('/api/cars', car);
+    return new Promise((resolve, _) => {
+        axios.post('/api/cars', car)
+        .then((result) => {
+            resolve(result.data);
+        }).catch((err) => {
+            console.error(err);
+        });
+    });
 };
