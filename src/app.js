@@ -9,7 +9,8 @@ import {
    getAllCars,
    getCarById,
    addCar 
-} from './API/carsApi.double';
+} from './API/carsApi';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttonLoadCars = document.getElementById('loadcars');
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
         cleanTable('cars-table');
         getAllCars().then((result) => {
-            addCarRows(result, 'cars-table');
+            addCarRows(result.data, 'cars-table');
         });
     });
 
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
         const carId = retrieveCarId();
         getCarById(carId)
-            .then((r) => populateEditCarForm(r));
+            .then((r) => populateEditCarForm(r.data));
     });
 
     const buttonAddCar = document.getElementById('add');
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return getAllCars();
             })
             .then((result) => {
-                addCarRows(result, 'cars-table');
+                addCarRows(result.data, 'cars-table');
             });
     });
 });
