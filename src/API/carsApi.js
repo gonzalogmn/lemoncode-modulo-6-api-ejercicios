@@ -9,9 +9,7 @@ export const getAllCars = () => {
         axios.get('/api/cars')
         .then((result) => {
             resolve(result.data);
-        }).catch((err) => {
-            this.handleError(err);
-        });
+        }).catch(handleError);
     });
 }
 
@@ -20,9 +18,7 @@ export const getCarById = (id) => {
         axios.get(`/api/cars/${id}`)
         .then((result) => {
             resolve(result.data);
-        }).catch((err) => {
-            this.handleError(err);
-        });
+        }).catch(handleError);
     });
 }
 
@@ -31,19 +27,17 @@ export const addCar = (car) => {
         axios.post('/api/cars', car)
         .then((result) => {
             resolve(result.data);
-        }).catch((err) => {
-            this.handleError(err);
-        });
+        }).catch(handleError);
     });
 };
 
 const handleError = (error) => {
     if(error.response) {
-        console.log(`Server response: ${error.response.status} ${error.response.data}`);
+        console.error(`Server response: ${error.response.status}`, error.response.data);
     } else if(error.request) {
-        console.log(`The request was made but no response was received ${error.request}`);
+        console.error(`The request was made but no response was received`, error.request);
     } else {
-        console.log(`Unknown error`, error.message);
+        console.error(`Unknown error`, error.message);
     }
 
 };
