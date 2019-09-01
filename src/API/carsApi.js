@@ -10,7 +10,7 @@ export const getAllCars = () => {
         .then((result) => {
             resolve(result.data);
         }).catch((err) => {
-            console.error(err);
+            this.handleError(err);
         });
     });
 }
@@ -21,7 +21,7 @@ export const getCarById = (id) => {
         .then((result) => {
             resolve(result.data);
         }).catch((err) => {
-            console.error(err);
+            this.handleError(err);
         });
     });
 }
@@ -32,7 +32,18 @@ export const addCar = (car) => {
         .then((result) => {
             resolve(result.data);
         }).catch((err) => {
-            console.error(err);
+            this.handleError(err);
         });
     });
+};
+
+const handleError = (error) => {
+    if(error.response) {
+        console.log(`Server response: ${error.response.status} ${error.response.data}`);
+    } else if(error.request) {
+        console.log(`The request was made but no response was received ${error.request}`);
+    } else {
+        console.log(`Unknown error`, error.message);
+    }
+
 };
